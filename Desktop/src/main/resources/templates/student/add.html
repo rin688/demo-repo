@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student</title>
+    <th:block th:replace="header::library"></th:block>
+</head>
+<body>
+<div th:replace="header :: navbar"></div>
+<div class="container mt-5">
+
+    <form th:action="@{/student/create}" th:object="${student}" method="post">
+        <div class="mb-3">
+            <label for="inputName" class="form-label">Name</label><small style="color: red" th:errors="*{name}"></small>
+            <input type="text" class="form-control" id="inputName" th:field="*{name}" pattern="^[a-zA-Z ]+$"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail" th:field="*{email}"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputPoint" class="form-label">Point</label>
+            <input type="number" class="form-control" id="inputPoint" th:field="*{point}" min="0" max="100"/>
+        </div>
+        <div class="mb-3">
+            <label for="inputDOB" class="form-label">DOB</label>
+            <input type="date" class="form-control" id="inputDOB" th:field="*{dob}"/>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputDOB" class="form-label">Classrooms</label><small style="color: red" th:errors="*{classroom}"></small>
+            <select th:field="*{classroom}">
+                <option th:each="classroom: ${classrooms}" th:value="${classroom.id}" th:text="${classroom.nameClass}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
